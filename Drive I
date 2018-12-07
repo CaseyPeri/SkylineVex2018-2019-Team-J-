@@ -116,5 +116,6 @@ task usercontrol() {
           //motor[BL] = vexRT[Ch3];
           //motor[FR] = vexRT[Ch2];
           //motor[BR] = vexRT[Ch2];
+          wait1Msec(10);
         }
 }
