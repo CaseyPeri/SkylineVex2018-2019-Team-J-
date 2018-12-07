@@ -1,0 +1,29 @@
+#pragma platform(VEX)
+#pragma competitionControl(Competition)
+#pragma autonomousDuration(20)
+#pragma userControlDuration(120)
+
+#include "Vex_Competition_Includes.c"
+
+void pre_auton() {
+
+}
+
+task autonomous() {
+        AuonomousCodePlaceholderForTesting();
+}
+
+task usercontrol() {
+        while (true) {
+          //Arcade Drive:
+          motor[FL] = vexRT[Ch2] + vexRT[CH1];
+          motor[BL] = vexRT[Ch2] + vexRT[CH1];
+          motor[FR] = vexRT[Ch2] - vexRT[CH1];
+          motor[BR] = vexRT[Ch2] - vexRT[CH1];
+          //Tank Drive:
+          //motor[FL] = vexRT[Ch3];
+          //motor[BL] = vexRT[Ch3];
+          //motor[FR] = vexRT[Ch2];
+          //motor[BR] = vexRT[Ch2];
+        }
+}
