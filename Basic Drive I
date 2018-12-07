@@ -2,6 +2,7 @@
 #pragma competitionControl(Competition)
 #pragma autonomousDuration(20)
 #pragma userControlDuration(120)
+#pragma config(UART_Usage, UART2, uartVEXLCD, baudRate19200, IOPins, None, None)
 #pragma config(Motor, port2, FL, tmotorNormal, openLoop)
 #pragma config(Motor, port3, BL, tmotorNormal, openLoop)
 #pragma config(Motor, port4, FR, tmotorNormal, openLoop)
@@ -9,8 +10,94 @@
 
 #include "Vex_Competition_Includes.c"
 
-void pre_auton() {
+const short lB = 1;
+const short cB = 2;
+const short rB = 4;
 
+void wFP() {
+while(nLCDButtons == 0){}
+wait1Msec(5);
+}
+
+void wFR() {
+while(nLCDButtons != 0){}
+wait1Msec(5);
+}
+
+int count = 0;
+
+//--------------------------------LCD-TEMP-START----------------------------------
+
+clearLCDLine(0);
+clearLCDLine(1);
+while(nLCDButtons != cB) {
+        switch(count){
+                //-------------------------Case-0-------------------------
+                case 0:
+                displayLCDCenteredString(0, "Tank Drive");
+                displayLCDCenteredString(1, "<         Enter        >");
+                wFP();
+                if(nLCDButtons == lB) {
+                        wFR();
+                        count = 3;
+                }
+                else if(nLCDButtons == rB) {
+                        wFR();
+                        count++;
+                }
+                break;
+                //-------------------------Case-1-------------------------
+                case 1:
+                displayLCDCenteredString(0, "Arcade Drive");
+                displayLCDCenteredString(1, "<         Enter        >");
+                wFP();
+                if(nLCDButtons == lB) {
+                        wFR();
+                        count--;
+                }
+                else if(nLCDButtons == rB) {
+                        wFR();
+                        count++;
+                }
+                break;
+                //-------------------------Case-2-------------------------
+                case 2:
+                displayLCDCenteredString(0, "Autonomous 1");
+                displayLCDCenteredString(1, "<         Enter        >");
+                wFP();
+                if(nLCDButtons == lB) {
+                        wFR();
+                        count--;
+                }
+                else if(nLCDButtons == rB) {
+                        wFR();
+                        count++;
+                }
+                break;
+                //-------------------------Case-3-------------------------
+                case 3:
+                displayLCDCenteredString(0, "Autonomous 2");
+                displayLCDCenteredString(1, "<         Enter        >");
+                wFP();
+                if(nLCDButtons == lB) {
+                        wFR();
+                        count--;
+                }
+                else if(nLCDButtons == rB) {
+                        wFR();
+                        count = 0;
+                }
+                break;
+                default:
+                count = 0
+                break;
+        }
+}
+
+//--------------------------------LCD-TEMP-END----------------------------------
+
+void pre_auton() {
+        
 }
 
 task autonomous() {
