@@ -2,6 +2,10 @@
 #pragma competitionControl(Competition)
 #pragma autonomousDuration(20)
 #pragma userControlDuration(120)
+#pragma config(Motor, port2, FL, tmotorNormal, openLoop)
+#pragma config(Motor, port3, BL, tmotorNormal, openLoop)
+#pragma config(Motor, port4, FR, tmotorNormal, openLoop)
+#pragma config(Motor, port5, BR, tmotorNormal, openLoop)
 
 #include "Vex_Competition_Includes.c"
 
